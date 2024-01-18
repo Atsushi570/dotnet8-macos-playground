@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
+    <ApplicationId>com.test.example</ApplicationId>
     <TargetFramework>net8.0-macos</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -10,4 +11,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="cp $(ProjectDir)../Libs/OCRProcessor/$(Configuration)/libOCRProcessor.dylib $(OutDir)" />
+  </Target>
 </Project>

@@ -1,10 +1,11 @@
-using Vision;
+using Worker.Services;
 
-namespace worker;
+namespace Worker;
 
 public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
+    private readonly ScreenshotOCRProcessor orcProcessor = new();
 
     public Worker(ILogger<Worker> logger)
     {
@@ -16,10 +17,23 @@ public class Worker : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             if (_logger.IsEnabled(LogLevel.Information))
+
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+
             }
             await Task.Delay(1000, stoppingToken);
+
+
+            try
+            {
+                orcProcessor.PerformOCRFromScreenshot();
+            }
+            catch
+            {
+
+                Console.WriteLine("Error");
+            }
         }
     }
 }

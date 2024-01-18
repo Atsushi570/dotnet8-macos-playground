@@ -6,4 +6,10 @@
     <ImplicitUsings>true</ImplicitUsings>
     <SupportedOSPlatformVersion>10.15</SupportedOSPlatformVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <ImageAsset Remove="Assets.xcassets/ScreenshotOCRProcessor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services/" />
+  </ItemGroup>
 </Project>

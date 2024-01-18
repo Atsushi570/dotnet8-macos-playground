@@ -1,27 +1,34 @@
 using ObjCRuntime;
+using Desktop.Services;
 
-namespace desktop;
+namespace Desktop;
 
-public partial class ViewController : NSViewController {
-	protected ViewController (NativeHandle handle) : base (handle)
-	{
-		// This constructor is required if the view controller is loaded from a xib or a storyboard.
-		// Do not put any initialization here, use ViewDidLoad instead.
-	}
+public partial class ViewController : NSViewController
+{
+    protected ViewController(NativeHandle handle) : base(handle)
+    {
+        // This constructor is required if the view controller is loaded from a xib or a storyboard.
+        // Do not put any initialization here, use ViewDidLoad instead.
+    }
 
-	public override void ViewDidLoad ()
-	{
-		base.ViewDidLoad ();
+    public override void ViewDidLoad()
+    {
+        base.ViewDidLoad();
 
-		// Do any additional setup after loading the view.
-	}
+        var processor = new ScreenshotOCRProcessor();
+        processor.PerformOCRFromScreenshot();
 
-	public override NSObject RepresentedObject {
-		get => base.RepresentedObject;
-		set {
-			base.RepresentedObject = value;
+        // Do any additional setup after loading the view.
+    }
 
-			// Update the view, if already loaded.
-		}
-	}
+    public override NSObject RepresentedObject
+    {
+        get => base.RepresentedObject;
+        set
+        {
+            base.RepresentedObject = value;
+
+            // Update the view, if already loaded.
+        }
+    }
 }
